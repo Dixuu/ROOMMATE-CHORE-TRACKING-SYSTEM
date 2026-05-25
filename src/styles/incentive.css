@@ -1,0 +1,124 @@
+
+/* PAGE */
+.cute-bg {
+  height: auto;
+  min-height: 100%;
+  padding: 24px;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #ffffff, #eaf5fe);
+  margin: 12px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.cute-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cute-header h1 {
+  margin: 0;
+  font-size: 26px;
+  color: #333;
+}
+
+.cute-header p {
+  color: #777;
+  font-size: 13px;
+}
+
+/* GRID (MORE SPACE) */
+.cute-grid {
+  background: white;
+  padding: 20px;
+  border-radius: 24px;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+
+  border: 1px solid #eee;
+}
+
+/* CARD (BIGGER + CLEANER) */
+.cute-card {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+  transition: all 0.25s ease;
+}
+
+.cute-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+}
+
+/* TOP */
+.cute-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cute-top h2 {
+  font-size: 16px;
+}
+
+/* STATS (MORE SPACED) */
+.cute-stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+}
+
+.cute-stats p {
+  font-size: 11px;
+  color: #999;
+}
+
+.cute-stats h3 {
+  font-size: 15px;
+}
+
+/* BADGE */
+.cute-badge {
+  text-align: center;
+  padding: 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  background: #f7f7ff;
+  color: #444;
+  margin-top: 10px;
+}
+
+/* PROGRESS */
+.progress {
+  height: 7px;
+  background: #eee;
+  border-radius: 20px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f9a8d4, #60a5fa);
+}
+
+/* BORDER TYPES */
+.cute-card.reward {
+  border: 1px solid #ffd700;
+}
+
+.cute-card.good {
+  border: 1px solid #ffe6a7;
+}
+
+.cute-card.penalty {
+  border: 1px solid #e6e6ff;
+}

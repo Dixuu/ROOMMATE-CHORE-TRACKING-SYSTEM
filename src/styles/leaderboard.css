@@ -1,0 +1,81 @@
+.leaderboard {
+  padding: 30px;
+  background: linear-gradient(135deg, #f6f7fb, #eef2ff);
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.leaderboard h2 {
+  margin-bottom: 18px;
+  font-size: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.leaderboard-table th {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.leader-row {
+  transition: all 0.25s ease;
+  animation: fadeInUp 0.4s ease both;
+}
+
+.leaderboard-table td {
+  padding: 14px;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 14px;
+}
+
+.leader-row:hover {
+  background: #f9fafb;
+  transform: translateY(-2px) scale(1.01);
+}
+
+.rank-1 {
+  background: linear-gradient(90deg, #fff7e6, #fffaf0);
+}
+
+.rank-2 {
+  background: linear-gradient(90deg, #f3f4f6, #f9fafb);
+}
+
+.rank-3 {
+  background: linear-gradient(90deg, #f0fdf4, #f7fff9);
+}
+
+.badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
