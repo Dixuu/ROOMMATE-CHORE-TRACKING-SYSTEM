@@ -1,8 +1,8 @@
 {
-  "name": "scoring-system",
+  "name": "roommate-chore-tracker",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://YOUR_USERNAME.github.io/scoring-system",
+  "homepage": "https://YOUR_USERNAME.github.io/roommate-chore-tracker",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
