@@ -26,25 +26,19 @@ export default function IncentiveBoard() {
 
       const formatted = Object.keys(firebaseData).map((key) => {
         const user = firebaseData[key];
-        const points = user.totalPoints || 0;  
-        const tasksDone = user.taskCount || 0; 
+        const points = user.totalPoints || 0;
+        const tasksDone = user.taskCount || 0;
 
         let status = "Poor";
-        let message = "Needs improvement 😢";
+        let message = "⚠️ Extra Chores Assigned";
 
-        if (points >= 90) {
-  status = "Reward";
-  message = "🎉 MOVIE NIGHT UNLOCKED!";
-} else if (points >= 70) {
-  status = "Great";
-  message = "🔥 Almost at Reward!";
-} else if (points >= 50) {
-  status = "Good";
-  message = "✨ Doing great!";
-} else {
-  status = "Start";
-  message = "Keep going! 💪";
-}
+        if (points >= 100) {
+          status = "Reward";
+          message = "🎉 Movie Night Reward";
+        } else if (points >= 50) {
+          status = "Good";
+          message = "👍 Well Done";
+        }
 
         return {
           id: key,
@@ -74,9 +68,21 @@ export default function IncentiveBoard() {
 
   const processedData = useMemo(() => {
     let filtered = [...data];
-    if (filter !== "ALL") filtered = filtered.filter((u) => u.status === filter);
-    if (search.trim()) filtered = filtered.filter((u) => u.name.toLowerCase().includes(search.toLowerCase()));
-    filtered.sort((a, b) => sortDesc ? b.points - a.points : a.points - b.points);
+
+    if (filter !== "ALL") {
+      filtered = filtered.filter((u) => u.status === filter);
+    }
+
+    if (search.trim()) {
+      filtered = filtered.filter((u) =>
+        u.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    filtered.sort((a, b) =>
+      sortDesc ? b.points - a.points : a.points - b.points
+    );
+
     return filtered;
   }, [data, search, filter, sortDesc]);
 
@@ -102,10 +108,10 @@ export default function IncentiveBoard() {
 
   return (
     <div className="cute-bg">
-
       <div className="cute-header">
         <h1>🏠 Incentive Dashboard</h1>
         <p>Kind rewards for everyday teamwork ✨</p>
+
         <div className="summary-bar">
           <p>👥 Total Users: {data.length}</p>
           <p>📊 Avg Points: {avgPoints}</p>
@@ -114,12 +120,27 @@ export default function IncentiveBoard() {
       </div>
 
       {champion && (
-        <div className={`champion-card ${champion.status === "Reward" ? "reward" : ""}`}>
-          <h2>{champion.status === "Reward" ? "🏆 Reward Winner" : "🏆 Top Performer"}</h2>
-          <p>{champion.name} — {champion.points} pts</p>
+        <div
+          className={`champion-card ${
+            champion.status === "Reward" ? "reward" : ""
+          }`}
+        >
+          <h2>
+            {champion.status === "Reward"
+              ? "🏆 Reward Winner"
+              : "🏆 Top Performer"}
+          </h2>
+
+          <p>
+            {champion.name} — {champion.points} pts
+          </p>
+
           <p>{champion.message}</p>
+
           {champion.status === "Reward" && (
-            <div className="reward-tag">Congratulations, Work Hard 🎉</div>
+            <div className="reward-tag">
+              Congratulations, Work Hard 🎉
+            </div>
           )}
         </div>
       )}
@@ -131,12 +152,14 @@ export default function IncentiveBoard() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+
         <select value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value="ALL">All</option>
           <option value="Reward">Reward</option>
           <option value="Good">Good</option>
           <option value="Poor">Poor</option>
         </select>
+
         <button onClick={() => setSortDesc((p) => !p)}>
           Sort: {sortDesc ? "High → Low" : "Low → High"}
         </button>
@@ -148,30 +171,55 @@ export default function IncentiveBoard() {
         ) : (
           processedData.map((u, i) => {
             const streak = getStreak(u);
+
             return (
               <div
                 key={u.id}
-                className={`cute-card ${u.status.toLowerCase()} ${u.status === "Reward" ? "reward" : ""}`}
+                className={`cute-card ${u.status.toLowerCase()} ${
+                  u.status === "Reward" ? "reward" : ""
+                }`}
               >
                 <div className="cute-top">
-                  <h2>{rankBadge(i)} {u.name}</h2>
-                  <span className="emoji">{emoji(u.status)} 🔥{streak}</span>
+                  <h2>
+                    {rankBadge(i)} {u.name}
+                  </h2>
+
+                  <span className="emoji">
+                    {emoji(u.status)} 🔥{streak}
+                  </span>
                 </div>
+
                 <div className="cute-stats">
                   <div>
                     <p>Points</p>
                     <h3>{u.points}</h3>
                   </div>
+
                   <div>
                     <p>Tasks</p>
                     <h3>{u.tasksDone}</h3>
                   </div>
                 </div>
+
                 <div className="progress">
-                  <div className="bar" style={{ width: `${Math.min((u.points / GOAL) * 100, 100)}%` }} />
+                  <div
+                    className="bar"
+                    style={{
+                      width: `${Math.min(
+                        (u.points / GOAL) * 100,
+                        100
+                      )}%`,
+                    }}
+                  />
                 </div>
-                <small>🎯 Goal: {u.points}/{GOAL}</small>
-                <div className="cute-badge">{u.status} • {u.message}</div>
+
+                <small>
+                  🎯 Goal: {u.points}/{GOAL}
+                </small>
+
+                <div className="cute-badge">
+                  {u.status} • {u.message}
+                </div>
               </div>
             );
           })

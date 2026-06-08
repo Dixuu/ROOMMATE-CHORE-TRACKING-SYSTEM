@@ -13,23 +13,33 @@ function getIncentive(points) {
     };
   }
 
+  if (points < 25) {
+    return {
+      status: "Start",
+      message: "Keep going! 💪",
+    };
+  }
+
   return {
     status: "Poor",
     message: "⚠️ Extra Chores Assigned",
   };
 }
 
- export function generateIncentives(scoresObj = {}) {
+export function generateIncentives(scoresObj = {}) {
+  if (!scoresObj || typeof scoresObj !== "object") return [];
+
   return Object.entries(scoresObj).map(([id, user]) => {
-    const points = user.points ?? user.totalPoints ?? 0;
+    const points = user?.totalPoints ?? user?.points ?? 0;
+    const tasksDone = user?.taskCount ?? user?.tasksDone ?? 0;
 
     const incentive = getIncentive(points);
 
     return {
       id,
-      name: user.name || "Unknown",
+      name: user?.name || "Unknown",
       points,
-      tasksDone: user.tasksDone ?? user.taskCount ?? 0,
+      tasksDone,
       status: incentive.status,
       message: incentive.message,
     };
